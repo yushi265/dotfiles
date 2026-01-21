@@ -65,3 +65,24 @@ chezmoi init
 - [Zinit](https://github.com/zdharma-continuum/zinit) - Zsh プラグインマネージャー
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh テーマ
 - [Ghostty](https://ghostty.org/) - ターミナルエミュレータ
+
+## パッケージ管理
+
+初回セットアップ時に `~/.Brewfile` から自動的にパッケージがインストールされます。
+
+### パッケージの追加
+
+```bash
+# Brewfileを編集
+chezmoi edit ~/.Brewfile
+
+# 手動でインストール（既存マシン）
+brew bundle --file=~/.Brewfile
+```
+
+### 現在管理しているパッケージ
+
+- `lsd` - ls の代替
+- `ripgrep` - 高速grep
+- `fzf` - ファジーファインダー
+- `ghq` - リポジトリ管理
