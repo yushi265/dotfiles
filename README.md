@@ -1,16 +1,6 @@
-# chezmoi_dotfiles
+# dotfiles
 
 [chezmoi](https://www.chezmoi.io/) で管理する dotfiles
-
-## 管理対象ファイル
-
-| ソースファイル | 配置先 |
-|---------------|--------|
-| `.chezmoi.toml.tmpl` | `~/.config/chezmoi/chezmoi.toml` |
-| `dot_zshrc` | `~/.zshrc` |
-| `dot_claude/settings.local.json` | `~/.claude/settings.local.json` |
-| `dot_config/ghostty/config` | `~/.config/ghostty/config` |
-| `dot_config/zsh/*.zsh` | `~/.config/zsh/*.zsh` |
 
 ## セットアップ
 
@@ -20,22 +10,10 @@
 # chezmoi をインストール
 brew install chezmoi
 
-# dotfiles を適用（初回はマシンタイプを聞かれる）
-chezmoi init --source=/path/to/chezmoi_dotfiles
+# dotfiles を初期化して適用（初回はマシンタイプを聞かれる）
+chezmoi init --apply https://github.com/yushi265/dotfiles.git
 # "Machine type (personal/work) [work]:" → Enter または値を入力
-chezmoi apply
 ```
-
-### マシンタイプについて
-
-初回 `chezmoi init` 時に `machineType` を設定します。
-
-| タイプ | 説明 | デフォルト条件 |
-|-------|------|---------------|
-| `personal` | 個人端末用（全エイリアス有効） | ホスト名が `MacBookPro` |
-| `work` | 会社PC用（共通エイリアスのみ） | 上記以外 |
-
-設定は `~/.config/chezmoi/chezmoi.toml` に保存されます。
 
 ### 既存マシンでの設定変更
 
@@ -69,7 +47,7 @@ chezmoi cd
 chezmoi apply --dry-run
 
 # machineType を再設定したい場合
-chezmoi init --source=/path/to/chezmoi_dotfiles
+chezmoi init
 ```
 
 ## zsh 設定構成
