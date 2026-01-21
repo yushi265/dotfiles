@@ -1,7 +1,12 @@
+{{- if eq .machineType "personal" }}
+# Personal machine aliases
 alias coleta-next="/Users/shina/documents/coleta/coleta-next"
 alias coleta="/Users/shina/documents/coleta/coleta/coleta-server"
 alias awsp='export AWS_PROFILE="coleta/tf"'
 alias awsd='export AWS_PROFILE="coleta-dev/tf"'
+
+{{- end }}
+# Common aliases
 alias c="clear"
 alias dc='docker compose'
 alias ls='lsd'

@@ -1,0 +1,8 @@
+{{- $machineType := "work" -}}
+{{- if eq .chezmoi.hostname "MacBookPro" -}}
+{{-   $machineType = "personal" -}}
+{{- end -}}
+{{- $machineType = promptStringOnce . "machineType" "Machine type (personal/work)" $machineType -}}
+
+[data]
+    machineType = {{ $machineType | quote }}
