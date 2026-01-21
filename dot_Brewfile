@@ -1,0 +1,8 @@
+# CLI tools
+brew "lsd"          # ls の代替
+brew "ripgrep"      # 高速grep
+brew "fzf"          # ファジーファインダー
+brew "ghq"          # リポジトリ管理
+
+# GUI apps (Cask)
+cask "ghostty"
