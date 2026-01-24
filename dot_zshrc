@@ -27,3 +27,8 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 . "$HOME/.local/bin/env"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/shina/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

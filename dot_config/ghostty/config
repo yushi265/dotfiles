@@ -22,6 +22,7 @@ font-feature = -dlig
 
 # ダーク/ライトモードで自動切り替え
 theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+background = 000
 
 # ========================================
 # ウィンドウ設定
@@ -43,7 +44,7 @@ window-save-state = always
 macos-titlebar-style = tabs
 
 # 半透明にする
-background-opacity = 0.90
+background-opacity = 0.80
 
 # ========================================
 # パフォーマンス設定
@@ -85,3 +86,25 @@ keybind = ctrl+cmd+l=goto_split:right
 # プロンプト間ジャンプ（Claude Codeの出力を素早く確認）
 keybind = cmd+up=jump_to_prompt:-1
 keybind = cmd+down=jump_to_prompt:1
+
+# ========================================
+# クイックターミナル
+# ========================================
+
+# クイックターミナルの位置を画面上部に設定
+quick-terminal-position = "top"
+
+# クイックターミナルを表示するスクリーンを設定 (メインスクリーン)
+quick-terminal-screen = "main"
+
+# フォーカスを失うと自動的に隠す
+quick-terminal-autohide = true
+
+# サイズ
+quick-terminal-size = 60%
+
+# アニメーション時間を設定（0で即時表示）
+quick-terminal-animation-duration = 0
+
+# グローバルホットキーを設定
+keybind = "global:ctrl+cmd+,=toggle_quick_terminal"
