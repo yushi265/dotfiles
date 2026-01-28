@@ -8,12 +8,23 @@ alias awsd='export AWS_PROFILE="coleta-dev/tf"'
 {{- end }}
 # Common aliases
 alias c="clear"
+alias f="yazi"
 alias dc='docker compose'
 alias ls='lsd'
 alias l='ls -l'
 alias la='ls -a'
 alias lal='ls -la'
 alias lt='ls --tree'
+alias moi="chezmoi"
+
+# git aliases
+alias gs="git status"
+alias gd="git diff"
+alias gw="git worktree"
+alias gwl="git worktree list"
+alias gl="git log"
+alias glo="git log --oneline"
+
 
 # bat (cat の代替)
 if builtin command -v bat > /dev/null; then
