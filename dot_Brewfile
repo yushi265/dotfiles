@@ -3,6 +3,7 @@ brew "lsd"          # ls の代替
 brew "ripgrep"      # 高速grep
 brew "fd"           # 高速ファイル検索
 brew "fzf"          # ファジーファインダー
+brew "zoxide"       # スマートなcd
 brew "ghq"          # リポジトリ管理
 brew "git-delta"    # diff表示
 brew "yazi"         # ファイラー
