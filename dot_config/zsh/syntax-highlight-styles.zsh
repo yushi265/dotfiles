@@ -1,5 +1,5 @@
 # シンタックスハイライトのスタイル設定
-ZSH_HIGHLIGHT_HIGHTLIGHTERS=(main brackets cursor root)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor root)
 
 # 連想配列
 typeset -A ZSH_HIGHLIGHT_STYLES
