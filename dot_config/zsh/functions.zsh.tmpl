@@ -10,3 +10,27 @@ browser-use() {
 	python webui.py --ip 127.0.0.1 --port 7788
 }
 {{- end }}
+
+# gitリポジトリ/worktreeをfzfで選択してcd
+# 通常リポジトリは緑色、worktreeは黄色で表示
+repo() {
+    local selected
+    selected=$(fd --type f --type d --hidden --no-ignore \
+        '^\.git$' ~/Documents --max-depth 5 2>/dev/null | \
+        while read -r gitpath; do
+            dir=$(dirname "$gitpath")
+            name=$(basename "$dir")
+            if [[ -d "$gitpath" ]]; then
+                printf '%s\t\033[32m%s\033[0m\n' "$dir" "$name"
+            else
+                printf '%s\t\033[33m↳ %s\033[0m\n' "$dir" "$name"
+            fi
+        done | \
+        sort -t$'\t' -k2 | \
+        fzf --ansi --height 40% --reverse --delimiter=$'\t' --with-nth=2 --preview 'ls -la {1}' | \
+        cut -f1)
+
+    if [[ -n "$selected" ]]; then
+        cd "$selected" || return 1
+    fi
+}
