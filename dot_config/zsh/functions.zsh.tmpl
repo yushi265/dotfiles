@@ -32,3 +32,107 @@ repo() {
         cd "$selected" || return 1
     fi
 }
+
+# git diffをfzfでインタラクティブに表示
+# -s: stagedのみ, -u: unstagedのみ, 引数なし: 両方
+# ENTER: diff表示(delta), CTRL-E: vim編集, CTRL-S: stage/unstageトグル, ESC: 終了
+gd() {
+    emulate -L zsh
+    setopt NO_XTRACE NO_VERBOSE
+
+    if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+        echo "Error: Not a git repository" >&2
+        return 1
+    fi
+
+    local mode files result key selected preview_cmd reload_cmd
+    mode="all"
+
+    while getopts "suh" opt; do
+        case $opt in
+            s) mode="staged" ;;
+            u) mode="unstaged" ;;
+            h)
+                echo "Usage: gd [-s|-u|-h]"
+                echo "  -s  Show staged changes only"
+                echo "  -u  Show unstaged changes only"
+                echo "  -h  Show this help"
+                echo ""
+                echo "Keys:"
+                echo "  ENTER    View diff (delta)"
+                echo "  CTRL-E   Edit file in vim"
+                echo "  CTRL-S   Toggle stage/unstage"
+                echo "  ESC      Quit"
+                return 0
+                ;;
+            *) return 1 ;;
+        esac
+    done
+
+    # {1}に[S]が含まれていればstaged、そうでなければunstagedのdiffを表示
+    if command -v delta &>/dev/null; then
+        preview_cmd='echo {1} | grep -q S && git diff --cached --color=always -- {2} | delta || git diff --color=always -- {2} | delta'
+    else
+        preview_cmd='echo {1} | grep -q S && git diff --cached --color=always -- {2} || git diff --color=always -- {2}'
+    fi
+
+    # fzfのreloadで使用するファイルリスト生成コマンド
+    reload_cmd='git diff --cached --name-only | while read -r f; do [ -n "$f" ] && printf "\033[32m[S]\033[0m %s\n" "$f"; done; git diff --name-only | while read -r f; do [ -n "$f" ] && printf "\033[33m[U]\033[0m %s\n" "$f"; done'
+
+    while true; do
+        case $mode in
+            staged)
+                files=$(git diff --cached --name-only | sed 's/^/[S] /')
+                ;;
+            unstaged)
+                files=$(git diff --name-only | sed 's/^/[U] /')
+                ;;
+            all)
+                files=$(
+                    git diff --cached --name-only | while read -r f; do
+                        [[ -n "$f" ]] && printf '\033[32m[S]\033[0m %s\n' "$f"
+                    done
+                    git diff --name-only | while read -r f; do
+                        [[ -n "$f" ]] && printf '\033[33m[U]\033[0m %s\n' "$f"
+                    done
+                )
+                ;;
+        esac
+
+        if [[ -z "$files" ]]; then
+            echo "No changes found"
+            break
+        fi
+
+        result=$(echo "$files" | fzf \
+            --ansi \
+            --height 60% \
+            --reverse \
+            --delimiter=' ' \
+            --expect=ctrl-e \
+            --preview "$preview_cmd" \
+            --preview-window 'right:60%:wrap' \
+            --header 'ENTER: diff | CTRL-E: edit | CTRL-S: stage/unstage | ESC: quit' \
+            --bind "ctrl-s:execute-silent(echo {1} | grep -q S && git reset HEAD -- {2} || git add -- {2})+reload($reload_cmd)")
+
+        [[ -z "$result" ]] && break
+
+        key=$(echo "$result" | head -1)
+        selected=$(echo "$result" | tail -1 | sed 's/^\[[SU]\] //')
+
+        [[ -z "$selected" ]] && break
+
+        case $key in
+            ctrl-e)
+                vim "$selected"
+                ;;
+            *)
+                if git diff --cached --name-only | grep -qx "$selected"; then
+                    git diff --cached -- "$selected" | delta --paging=never | less -R
+                else
+                    git diff -- "$selected" | delta --paging=never | less -R
+                fi
+                ;;
+        esac
+    done
+}
