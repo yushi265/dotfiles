@@ -1,4 +1,5 @@
 # CLI tools
+brew "neovim"       # Neovim
 brew "lsd"          # ls の代替
 brew "ripgrep"      # 高速grep
 brew "fd"           # 高速ファイル検索
