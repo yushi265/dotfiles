@@ -1,0 +1,17 @@
+# Claude Code
+.claude/settings.local.json
+
+# macOS
+.DS_Store
+
+# Vim/Neovim
+*.swp
+*.swo
+*.un~
+
+# エディタ
+.idea/
+.vscode/
+
+# 環境固有
+*.local
