@@ -142,25 +142,47 @@ LazyVim の基本操作をまとめたガイドです。
 
 ## Git 操作
 
+### Lazygit
+
 | キー | 説明 |
 |------|------|
 | `<Leader>gg` | Lazygit を開く |
 | `<Leader>gG` | Lazygit（cwd） |
-| `<Leader>gb` | blame 行 |
-| `<Leader>gB` | ブラウザで開く |
 | `<Leader>gf` | 現在のファイルのコミット履歴 |
-| `<Leader>gl` | Lazygit ログ |
-| `<Leader>gL` | Lazygit ログ（cwd） |
-| `]h` | 次の hunk へ |
-| `[h` | 前の hunk へ |
-| `<Leader>ghs` | hunk をステージ |
-| `<Leader>ghr` | hunk をリセット |
-| `<Leader>ghS` | バッファをステージ |
-| `<Leader>ghR` | バッファをリセット |
-| `<Leader>ghp` | hunk をプレビュー |
-| `<Leader>ghb` | blame 行 |
-| `<Leader>ghd` | diff |
-| `<Leader>ghD` | Diff（~） |
+
+### Git ピッカー（fzf-lua）
+
+| キー | 説明 |
+|------|------|
+| `<Leader>gb` | Git ブランチ一覧 |
+| `<Leader>gc` | Git コミット履歴 |
+| `<Leader>gC` | Git コミット履歴（バッファ） |
+| `<Leader>gt` | Git ステータス |
+| `<Leader>gB` | ブラウザで開く |
+
+### Hunk 操作（AstroVim 風）
+
+| キー | 説明 |
+|------|------|
+| `<Leader>gs` | Hunk をステージ |
+| `<Leader>gr` | Hunk をリセット |
+| `<Leader>gS` | バッファをステージ |
+| `<Leader>gR` | バッファをリセット |
+| `<Leader>gu` | ステージを取り消し |
+| `<Leader>gp` | Hunk をプレビュー |
+| `<Leader>gj` | 次の Hunk へ |
+| `<Leader>gk` | 前の Hunk へ |
+| `]h` | 次の Hunk へ |
+| `[h` | 前の Hunk へ |
+
+### Blame / Diff
+
+| キー | 説明 |
+|------|------|
+| `<Leader>gl` | Blame 行 |
+| `<Leader>gL` | Blame バッファ |
+| `<Leader>gd` | Diff |
+| `<Leader>gD` | Diff（~） |
 
 ## ターミナル
 
