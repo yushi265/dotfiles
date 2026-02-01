@@ -32,3 +32,12 @@ fpath=(/Users/shina/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+{{- if eq .machineType "personal" }}
+
+# bun completions
+[ -s "/Users/shina/.bun/_bun" ] && source "/Users/shina/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+{{- end }}
