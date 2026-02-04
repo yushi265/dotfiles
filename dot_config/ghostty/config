@@ -83,6 +83,13 @@ keybind = ctrl+cmd+j=goto_split:bottom
 keybind = ctrl+cmd+k=goto_split:top
 keybind = ctrl+cmd+l=goto_split:right
 
+# スプリットリサイズ（Vim風）
+keybind = ctrl+cmd+shift+h=resize_split:left,40
+keybind = ctrl+cmd+shift+j=resize_split:down,40
+keybind = ctrl+cmd+shift+k=resize_split:up,40
+keybind = ctrl+cmd+shift+l=resize_split:right,40
+keybind = ctrl+cmd+shift+enter=equalize_splits
+
 # プロンプト間ジャンプ（Claude Codeの出力を素早く確認）
 keybind = cmd+up=jump_to_prompt:-1
 keybind = cmd+down=jump_to_prompt:1
