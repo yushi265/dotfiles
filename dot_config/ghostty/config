@@ -72,6 +72,10 @@ shell-integration-features = cursor,sudo,title
 # 設定リロード
 keybind = cmd+shift+comma=reload_config
 
+# スプリット表示
+unfocused-split-opacity = 0.4
+unfocused-split-fill = #313244
+
 # スプリット操作
 keybind = cmd+d=new_split:right
 keybind = cmd+shift+d=new_split:down
